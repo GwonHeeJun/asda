@@ -6,7 +6,7 @@ import time
 
 start = time.time() 
 
-keyword="수도꼭지"
+keyword="the secret method of fitting a rodo"
 
 def removeTag(content): # 영문 태그 다 없애주는 함수
    cleanr =re.compile('<([a-zA-Z]*)(\\s[a-zA-Z]*=[^>]*)?(\\s)*?>')
@@ -30,12 +30,12 @@ def getFristBlog(kwd): # 블로그 최상단 게시글 스크랩
 
 def getBlogContent(uri): # 블로그 내용 스크랩
     payload = {"title" : "", "contents" : ""}
-
+    print(uri)
     response = requests.get(uri.replace("https://", "https://m."))
     html = response.text
     soup = BeautifulSoup(html, 'html.parser')
     tags = soup.select(
-        '.se-main-container > .se-text > .se-component-content > .se-section > .se-module'
+        '.se-main-container > .se-text > .se-component-content > .se-section > .se-module > p'
     ) # 게시글 내용 찾기.
     payload["title"] = soup.find("title").text
     for title in tags: # 가공
